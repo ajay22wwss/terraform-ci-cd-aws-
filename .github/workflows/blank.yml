@@ -37,8 +37,8 @@ jobs:
     - name: Terraform init and validate
       run: |
         echo `pwd`
-        echo "** Running Terraform Init for sample/cloudwatchlogs.tf**"
-        terraform init -backend-config="sample/cloudwatchlogs/backend.tf"
+        echo "** Running Terraform Init for tfpath**"
+        terraform init -backend-config="tfpath"
         # echo "** Running Terraform Init**"
         # terraform init
         

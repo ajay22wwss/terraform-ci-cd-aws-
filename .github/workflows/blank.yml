@@ -29,28 +29,33 @@ jobs:
     - name: Setup Terraform CLI
       uses: hashicorp/setup-terraform@v2.0.2
 
-    - name: Terraform init, plan and apply
+    - name: Print working directory
       run: |
-        echo `pwd`
-        echo "tfpath ${{ github.event.inputs.tfpath }}"
-        echo "** Running Terraform Init**"
-        terraform init
+        echo "Current working directory:"
+        pwd
 
-        echo "** Running Terraform Validate**"
-        terraform validate
+#     - name: Terraform init, plan and apply
+#       run: |
+#         echo `pwd`
+#         echo "tfpath ${{ github.event.inputs.tfpath }}"
+#         echo "** Running Terraform Init**"
+#         terraform init
 
-        echo "** Running Terraform Plan**"
-        terraform plan
+#         echo "** Running Terraform Validate**"
+#         terraform validate
 
-#        echo "** Running Terraform Apply**"
-#        terraform apply -auto-approve
-      working-directory: 'terraform-ci-cd-aws/sample/cloudwatchlogs'  # Assuming this is the correct structure
-    - name: Terraform Destroy
-      run: |
-        echo "** Running Terraform Destroy**"
-        terraform plan -destroy
-#        terraform destroy -auto-approve
-      working-directory: 'terraform-ci-cd-aws/sample/cloudwatchlogs'  # Assuming this is the correct structure
+#         echo "** Running Terraform Plan**"
+#         terraform plan
+
+# #        echo "** Running Terraform Apply**"
+# #        terraform apply -auto-approve
+#       working-directory: 'terraform-ci-cd-aws/sample/cloudwatchlogs'  # Assuming this is the correct structure
+#     - name: Terraform Destroy
+#       run: |
+#         echo "** Running Terraform Destroy**"
+#         terraform plan -destroy
+# #        terraform destroy -auto-approve
+#       working-directory: 'terraform-ci-cd-aws/sample/cloudwatchlogs'  # Assuming this is the correct structure
 
 
         

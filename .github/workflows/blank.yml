@@ -49,10 +49,11 @@ jobs:
 
 #        echo "** Running Terraform Apply**"
 #        terraform apply -auto-approve
-      working-directory: ${{ github.event.inputs.tfpath }}
+      working-directory: './terraform-ci-cd-aws-/sample/cloudwatchlogs'
     - name: Terraform Destroy
       run: |
         echo "** Running Terraform Destroy**"
         terraform plan -destroy
 #        terraform destroy -auto-approve
-      working-directory: ${{ github.event.inputs.tfpath }}
+      working-directory: './terraform-ci-cd-aws-/sample/cloudwatchlogs'
+

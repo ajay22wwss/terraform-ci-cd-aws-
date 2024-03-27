@@ -9,57 +9,15 @@ on:
         description: 'TF File Path'     
         required: false
         default: 'sample/cloudwatchlogs'
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  tf_code_check:
-    name: Terraform Validation and Build
+  my-job:
     runs-on: ubuntu-latest
-
-    if:  ${{ inputs.tfpath }} 
     steps:
-    - name: Checkout tf code in runner environment
-      uses: actions/checkout@v3.5.2
-
-    - name: Configure AWS Credentials Action For GitHub Actions
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
-        aws-region: us-east-1
-
-    - name: Setup Terraform CLI
-      uses: hashicorp/setup-terraform@v2.0.2
-
-    - name: Terraform init, plan and apply
+    - name: Print tfpath input
       run: |
-        echo `pwd`
-        echo "tfpath ${{ github.event.inputs.tfpath }}"
-        echo "** Running Terraform Init**"
-        terraform init
+        echo "** tfpath input value: ${{ github.event.inputs.tfpath }}**"
 
-        echo "** Running Terraform Validate**"
-        terraform validate
+        
 
-        echo "** Running Terraform Plan**"
-        terraform plan
-
-#        echo "** Running Terraform Apply**"
-#        terraform apply -auto-approve
-      working-directory: './terraform-ci-cd-aws-/sample/cloudwatchlogs'
-
-    - name: Print working directory
-      run: |
-        echo "Current working directory:"
-        pwd
-
-    - name: Terraform Destroy
-      run: |
-        echo "** Running Terraform Destroy**"
-        terraform plan -destroy
-#        terraform destroy -auto-approve
-      working-directory: './terraform-ci-cd-aws-/sample/cloudwatchlogs'
 

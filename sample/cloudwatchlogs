@@ -1,0 +1,33 @@
+#Terraform Block
+terraform {
+  required_version = "1.7.4"
+   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+## aws account region
+
+provider "aws" {
+  region = "us-east-1"
+  profile = "default"
+}
+
+## creating aws cloudwatch logs
+
+
+variable "log_group_names" {
+  type    = list(string)
+  default = ["impulse-dev-logs","reese-dev-logs","randa-dev-logs","meijer-dev-logs","bullnursery-dev-logs","mojito-dev-logs"]
+}
+
+resource "aws_cloudwatch_log_group" "log_groups" {
+  count = length(var.log_group_names)
+
+  name = var.log_group_names[count.index]
+
+}
+
